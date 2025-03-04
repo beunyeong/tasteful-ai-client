@@ -37,6 +37,8 @@
 | <img src="https://github.com/user-attachments/assets/7ce3031b-a8e4-4071-8e6f-772112bd5075" width="60"/> | **Real-time Chat: SockJS / STOMP (WebSocket)** | 실시간 채팅을 위한 WebSocket 통신 방식 적용 |
 | <img src="https://github.com/user-attachments/assets/f355fc2a-4594-416a-a085-f7b46cc410b5" width="60"/> | **Styling: Styled-Components / CSS Modules** | 스타일링 재사용성과 모듈화를 위한 UI 디자인 |
 
+---
+## 📼 [시연 영상](https://drive.google.com/file/d/1tPnVG6Xt475TwMckc2jU5m3fnFSIIEl0/view?usp=drive_link)
 
 ---
 ## 🍙 HOME
