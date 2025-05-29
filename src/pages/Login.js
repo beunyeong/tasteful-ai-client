@@ -7,8 +7,8 @@ import "./Login.css";
 
 export const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [modalMessage, setModalMessage] = useState(""); // ✅ 모달 메시지
-  const [showModal, setShowModal] = useState(false); // ✅ 모달 상태
+  const [modalMessage, setModalMessage] = useState(""); // 모달 메시지
+  const [showModal, setShowModal] = useState(false); // 모달 상태
 
   const navigate = useNavigate();
   const location = useLocation(); // 로그인 전 방문하려던 페이지 정보 저장
@@ -19,13 +19,13 @@ export const Login = () => {
     setShowModal(true);
   };
 
-  // ✅ handleChange 함수 추가
+  // handleChange 함수 추가
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // ✅ 취향 데이터 존재 여부 확인 함수 (기존 API 활용)
+  // 취향 데이터 존재 여부 확인 함수 (기존 API 활용)
   const checkTasteData = async (accessToken, memberId) => {
     try {
       const endpoints = [
@@ -57,10 +57,10 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("로그인 요청 시작 🚀"); // ✅ 로그 추가
+      console.log("로그인 요청 시작 🚀"); // 로그 추가
 
       const response = await axios.post("/api/auth/login", formData);
-      console.log("로그인 성공 ✅:", response.data);
+      console.log("로그인 성공 :", response.data);
 
       const { accessToken, refreshToken, memberRole, memberId, nickname } = response.data.data;
 
@@ -70,7 +70,7 @@ export const Login = () => {
         return;
       }
 
-      // ✅ 로컬 스토리지에 저장
+      // 로컬 스토리지에 저장
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("memberRole", memberRole);
@@ -81,20 +81,20 @@ export const Login = () => {
 
       setShowModal(false);
 
-      // ✅ 관리자라면 바로 /admin으로 이동
+      // 관리자라면 바로 /admin으로 이동
       if (memberRole === "ADMIN") {
         console.log("관리자 계정 → 관리자 페이지 이동 🚀");
         setTimeout(() => window.location.replace("/admin"), 300);
         return;
       }
 
-      // ✅ 기존 취향 데이터 확인 API 호출
+      // 기존 취향 데이터 확인 API 호출
       console.log("취향 데이터 확인 요청 시작 🔍");
       const hasTasteData = await checkTasteData(accessToken, memberId);
 
       console.log("취향 데이터 응답 ✅:", hasTasteData);
 
-      // ✅ 취향 데이터 유무에 따라 페이지 이동
+      // 취향 데이터 유무에 따라 페이지 이동
       setTimeout(() => {
         if (hasTasteData) {
           console.log("취향 데이터 있음 → 메인 페이지 이동 🏠");
@@ -130,7 +130,7 @@ export const Login = () => {
           name="email"
           placeholder="이메일"
           value={formData.email}
-          onChange={handleChange} // ✅ 오류 해결
+          onChange={handleChange}
           required
         />
         <input
@@ -138,7 +138,7 @@ export const Login = () => {
           name="password"
           placeholder="비밀번호"
           value={formData.password}
-          onChange={handleChange} // ✅ 오류 해결
+          onChange={handleChange}
           required
         />
         <button type="submit" className="login-button">
@@ -150,7 +150,7 @@ export const Login = () => {
         <a href="/signup">회원가입</a>
       </div>
 
-      {/* ✅ 모달 컴포넌트 */}
+      {/* 모달 컴포넌트 */}
       <Modal show={showModal} onHide={handleClose} centered>
         <Modal.Body>
           <p>{modalMessage}</p>
@@ -161,7 +161,30 @@ export const Login = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <div className="oauth-buttons">
+  <a 
+    href="http://localhost:8080/oauth2/authorization/google"
+    className="google-login-button"
+    >
+    구글 로그인
+  </a>
+
+  <button
+    type="button"
+    className="kakao-login-button"
+    onClick={() => handleShow("카카오 로그인은 현재 준비 중입니다🥲")}
+  >
+    카카오 로그인
+  </button>
+</div>
+
+  {/* <a href="http://localhost:8080/oauth2/authorization/kakao" className="kakao-login-button">
+    카카오 로그인
+  </a>
+</div> */}
     </div>
+
+    
   );
 };
 

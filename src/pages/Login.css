@@ -21,11 +21,11 @@
 /* 입력 필드 스타일 */
 .login-form input {
   width: 100%;
-  padding: 14px; /* ✅ 내부 여백 증가 */
+  padding: 14px; /* 내부 여백 증가 */
   margin-bottom: 20px;
   border: 1px solid #ccc;
-  border-radius: 8px; /* ✅ 모서리 둥글게 */
-  font-size: 16px; /* ✅ 글씨 크기 증가 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  font-size: 16px; /* 글씨 크기 증가 */
   box-sizing: border-box;
 }
 
@@ -67,4 +67,42 @@
 
 .login-footer a:hover {
   text-decoration: underline;
+}
+
+.oauth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.google-login-button,
+.kakao-login-button {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+.google-login-button {
+  background-color: #db4437;
+  color: white;
+  text-decoration: none;
+}
+.google-login-button:hover {
+  background-color: #c23321;
+}
+
+.kakao-login-button {
+  background-color: #f7e600;
+  color: #3c1e1e;
+}
+.kakao-login-button:hover {
+  background-color: #ffe812;
 }

@@ -22,9 +22,11 @@ import MembersList from "./pages/MembersList";
 import ChangePassword from "./pages/ChangePassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ChatBot from "./components/ChatBot";
-import PasswordVerifyPage from "./pages/PasswordVerifyPage"; // ✅ 추가
-import AccountDeletePage from "./pages/AccountDeletePage"; // ✅ 추가
+import PasswordVerifyPage from "./pages/PasswordVerifyPage";
+import AccountDeletePage from "./pages/AccountDeletePage";
 import TasteSelection from "./pages/TasteSelection";
+import OAuth2RedirectHandler from "./pages/OAuth2RedirectHandler";
+
 
 function Layout() {
   const location = useLocation();
@@ -72,10 +74,10 @@ function Layout() {
           <Route path="/mypage/change-password" element={<ChangePassword />} />
           <Route path="/taste-selection" element={<TasteSelection />} />
 
-          {/* ✅ AI 채팅방 추가 */}
+          {/* AI 채팅방 추가 */}
           <Route path="/chatting/room/ai" element={<ChatBot />} />
 
-          {/* ✅ 비밀번호 검증 및 계정 삭제 추가 */}
+          {/* 비밀번호 검증 및 계정 삭제 추가 */}
           <Route path="/password/verify" element={<PasswordVerifyPage />} />
           <Route path="/account/delete" element={<AccountDeletePage />} />
 
@@ -140,7 +142,10 @@ function App() {
 
   return (
     <Router>
-      <Layout />
+      <Routes>
+        <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
+        <Route path="/*" element={<Layout />} />
+      </Routes>
     </Router>
   );
 }
